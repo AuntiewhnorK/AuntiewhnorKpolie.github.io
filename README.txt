@@ -1,3 +1,9 @@
+My Portfolio Website!
+Here I show my recent work and what's to come! It's not perfect, but I'm happy to show what I've been doing over the past year!
+
+
+
+Other:
 Strata by HTML5 UP
 html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
