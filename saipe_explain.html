@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>US Poverty Levels</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+
+
+<body class="is-preload">
+
+	<!-- Header -->
+	<header id="header">
+		<div class="inner">
+			<h2>2020 SAIPE Data Walkthrough</h2>
+			<a href="index.html">Homepage</a>
+		</div>
+	</header>
+
+	<!-- Main -->
+	<div id="main">
+
+		<!-- One -->
+		<section id="one">
+			<p>This dataset features SAIPE (Small Area Income and Poverty Estimates) for the United States. The Census
+				Bureau used IRS and SNAP data to create the datasets for school districts and for states, along with
+				their corresponding counties.</p>
+
+			<p>Below, I walk through on how I prepared the data for Tableau.</p>
+		</section>
+
+		<!-- Two -->
+		<section id="two">
+			<header class="major">
+				<h3>Initial Data Structure</h3>
+			</header>
+
+			<p>Here is a glimpse at the first few rows in Excel:</p>
+
+			<figure>
+				<img class="saipeimg" src="images/estdata.jpg">
+				<img class="saipeimg" style="margin-top: 20px" src="images/estdata2.jpg">
+				<figcaption>Each group (Ages and Median Income) is separated with subcolumns</figcaption>
+			</figure>
+
+			<br/>
+			<p>Although this is fine for humans to read, this format isn't
+				great for Tableau. There's 4 age categories with their own percents
+				and estimates. For visualization purposes, it would be better 
+				to have one column for age category, one for poverty estimate, 
+				and one for poverty percent. Median Household Income can be a 
+				column on it's own, and the 90% Confidence Interval columns
+				are irrelevant.</p>
+		</section>
+
+		<!-- Three -->
+		<section id="three">
+			<header class="major">
+				<h3>Transformation with Power Query</h3>
+			</header>
+
+			<p>The data is less cluttered after removing unwanted columns (Confidence
+				Intervals, Table Description). To finish data preparation, 
+				I turned the data into an Excel table,
+				and used Power Query to pivot and unpivot columns.</p>
+			
+			<img class="saipeimg" src="images/cleanedtable.png">
+			<img class="saipeimg" style="margin-bottom: 20px" src="images/PowerQuery1.png">
+		
+			<p>First, I transform the Poverty Percent and Poverty Estimate columns
+				into a single column, and then split on the comma to create 
+				two columns (Attribute.1 and Attribute.2).</p>
+
+			<img class="saipeimg" src="images/PowerQuery2.png">
+			<img class="saipeimg" style="margin-bottom: 20px"src="images/PowerQuery3.png">
+
+			<p>Then, I repivot the Attribute.1 column and 
+				rename Attribute.2 into Age Category. I also corrected the
+				FIPS Code type and renamed the "Name" column into County name
+				for reability.</p>
+
+			<img class="saipeimg" src="images/PowerQuery4.png">
+			<img class="saipeimg" src="images/PowerQuery5.png">
+		</section>
+
+		<section id="four">
+			<header class="major">
+				<h3>Final Table</h3>
+			</header>
+				
+			<img class="saipeimg" src="images/tablefinal.png">
+			<p>This final table is what I used to create my Tableau visualization. It is much easier to work with,
+				despite having multiple of the same state and county names in the "Postal Code" and "County" columns.
+			</p>
+		</section>
+
+		
+</body>
+
+</html>
